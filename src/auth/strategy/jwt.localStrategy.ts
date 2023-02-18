@@ -19,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: Payload) {
     // 디코딩된 payload가 적합한지 체크
     const user = await this.userRepository.findUserByIdWithoutPassword(
-      payload.sub,
+      payload.id,
     );
     if (user) {
       return user;

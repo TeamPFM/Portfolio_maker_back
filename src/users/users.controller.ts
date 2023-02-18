@@ -28,8 +28,6 @@ export class UsersController {
   // Guards에서 인증처리된 것을 req에 넘겨준다.
   @Get('info')
   findOne(@CurrentUser() user) {
-    // 커스텀 데코레이터
     return user;
-    // user를 readonly로 넘겨준다.
   }
 }
