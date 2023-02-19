@@ -19,6 +19,7 @@ export class UsersService {
         name,
         password: hashPassword,
       });
+      return { status: 201, success: true };
     }
   }
 }

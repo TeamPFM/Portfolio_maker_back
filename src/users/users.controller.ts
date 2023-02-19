@@ -15,8 +15,8 @@ export class UsersController {
 
   @Post()
   async createUser(@Body() body: CreateUsersDto) {
-    await this.usersService.createUser(body);
-    return { status: 201, success: true };
+    const response = await this.usersService.createUser(body);
+    return response;
   }
 
   @Post('login')
