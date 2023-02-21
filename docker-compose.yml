@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  mysql:
+    env_file:
+      - .env
+    image: mysql:5.7
+    ports:
+      - '3306:3306'
+
+  app:
+    ports:
+      - 80:5000
+    build: .
+    depends_on:
+      - mysql

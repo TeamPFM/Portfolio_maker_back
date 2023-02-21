@@ -18,7 +18,7 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
       port: 3306,
       username: process.env.MYSQL_USERNAME,
       password: process.env.MYSQL_PASSWORD,
-      database: 'myfolio',
+      database: process.env.MYSQL_DATABASE,
       entities: [UsersEntity],
       synchronize: true,
     }),
