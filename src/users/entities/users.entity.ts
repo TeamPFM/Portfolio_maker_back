@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { CommonEntity } from 'src/common/entities/common.entity';
-import { Entity, Column } from 'typeorm';
+import { ProjectsEntity } from 'src/projects/entities/projects.entity';
+import { Entity, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class UsersEntity extends CommonEntity {
@@ -16,4 +17,22 @@ export class UsersEntity extends CommonEntity {
 
   @Column({ type: 'varchar', nullable: false })
   password: string;
+
+  @Column({ type: 'varchar' })
+  about: string;
+
+  @Column({ type: 'varchar' })
+  link: string;
+
+  @Column({ type: 'varchar' })
+  phone: string;
+
+  @Column({ type: 'varchar', name: 'image_path' })
+  imagePath: string;
+
+  @Column({ type: 'varchar', name: 'image_name' })
+  imageName: string;
+
+  @OneToMany(() => ProjectsEntity, (projects) => projects.users)
+  projects: ProjectsEntity[];
 }
