@@ -1,5 +1,5 @@
 import { CommonEntity } from 'src/common/entities/common.entity';
-import { UsersEntity } from 'src/users/entities/users.entitiy';
+import { UsersEntity } from 'src/users/entities/users.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('projects')

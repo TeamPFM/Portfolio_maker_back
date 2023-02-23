@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { UsersEntity } from 'src/users/entities/users.entity';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateProject } from '../dto/create-project.dto';
 import { UpdateProject } from '../dto/update-project.dto';
 import { ProjectsEntity } from '../entities/projects.entity';
@@ -19,19 +20,29 @@ export class ProjectsRepository {
   }
   async findProjectsByUserId(userId: number): Promise<ProjectsEntity[]> {
     return await this.projectsRepository.find({
-      relations: ['users'],
       where: {
-        id: userId,
+        users: {
+          id: userId,
+        },
       },
     });
   }
-  async deleteProjectsById(id: number): Promise<void> {
-    await this.projectsRepository.delete(id);
+  async deleteProjectsById(user: UsersEntity, id: number): Promise<number> {
+    const result: DeleteResult = await this.projectsRepository.delete({
+      id,
+      users: user,
+    });
+    return result.affected;
   }
   async updateProjectById(
+    user: UsersEntity,
     id: number,
     updateProject: UpdateProject,
-  ): Promise<void> {
-    await this.projectsRepository.update(id, updateProject);
+  ): Promise<number> {
+    const result: UpdateResult = await this.projectsRepository.update(
+      { id, users: user },
+      updateProject,
+    );
+    return result.affected;
   }
 }

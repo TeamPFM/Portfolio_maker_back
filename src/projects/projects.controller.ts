@@ -27,7 +27,7 @@ export class ProjectsController {
     @CurrentUser() user: UsersEntity,
     @Body('project') createProject: CreateProject,
   ) {
-    await this.projectService.createProject(createProject);
+    await this.projectService.createProject(user, createProject);
     return { status: 201, success: true };
   }
   @Get('')
@@ -35,17 +35,27 @@ export class ProjectsController {
     const projects = await this.projectService.getProjects(userId);
     return { status: 200, success: true, projects };
   }
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
-  async deleteProject(@Param('id', ParseIntPipe) id: number) {
-    await this.projectService.deleteProject(id);
-    return { status: 200, success: true };
+  async deleteProject(
+    @CurrentUser() user: UsersEntity,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    const success = await this.projectService.deleteProject(user, id);
+    return { status: 200, success };
   }
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async updateProject(
+    @CurrentUser() user: UsersEntity,
     @Param('id', ParseIntPipe) id: number,
     @Body('project') updateProject: UpdateProject,
   ) {
-    await this.projectService.updateProject(id, updateProject);
-    return { status: 200, success: true };
+    const success = await this.projectService.updateProject(
+      user,
+      id,
+      updateProject,
+    );
+    return { status: 200, success };
   }
 }
