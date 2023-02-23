@@ -8,7 +8,11 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
+import { CurrentUser } from 'src/common/decorators/user.decorator';
+import { UsersEntity } from 'src/users/entities/users.entity';
 import { CreateProject } from './dto/create-project.dto';
 import { UpdateProject } from './dto/update-project.dto';
 import { ProjectsService } from './projects.service';
@@ -16,23 +20,28 @@ import { ProjectsService } from './projects.service';
 @Controller('api/projects')
 export class ProjectsController {
   constructor(private readonly projectService: ProjectsService) {}
+
+  @UseGuards(JwtAuthGuard)
   @Post('')
-  async createProject(@Body('project') createProject: CreateProject) {
+  async createProject(
+    @CurrentUser() user: UsersEntity,
+    @Body('project') createProject: CreateProject,
+  ) {
     await this.projectService.createProject(createProject);
     return { status: 201, success: true };
   }
   @Get('')
-  async getprojects(@Query('user-id', ParseIntPipe) userId: number) {
+  async getProjects(@Query('user-id', ParseIntPipe) userId: number) {
     const projects = await this.projectService.getProjects(userId);
     return { status: 200, success: true, projects };
   }
   @Delete('/:id')
-  async deleteResume(@Param('id', ParseIntPipe) id: number) {
+  async deleteProject(@Param('id', ParseIntPipe) id: number) {
     await this.projectService.deleteProject(id);
     return { status: 200, success: true };
   }
   @Put('/:id')
-  async updateResume(
+  async updateProject(
     @Param('id', ParseIntPipe) id: number,
     @Body('project') updateProject: UpdateProject,
   ) {
