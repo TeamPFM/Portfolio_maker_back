@@ -5,8 +5,6 @@ import { ValidationPipe } from '@nestjs/common';
 import { utilities, WinstonModule } from 'nest-winston';
 import * as winstonDaily from 'winston-daily-rotate-file';
 import * as winston from 'winston';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as expressBasicAuth from 'express-basic-auth';
 
 const logDir = __dirname + '../../logs';
 
@@ -41,25 +39,6 @@ async function bootstrap() {
       ],
     }),
   });
-
-  app.use(
-    ['/docs', '/docs-json'],
-    expressBasicAuth({
-      challenge: true,
-      users: {
-        [process.env.SWAGGER_USER]: process.env.SWAGGER_PASSWORD,
-      },
-    }),
-  );
-
-  const config = new DocumentBuilder()
-    .setTitle('P.F.M')
-    .setDescription('PFM API description')
-    .setVersion('1.0.0')
-    .addTag('API')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/docs', app, document);
 
   app.enableCors({
     origin: true,
