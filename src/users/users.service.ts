@@ -22,4 +22,19 @@ export class UsersService {
       return { status: 201, success: true };
     }
   }
+
+  async modify(body) {
+    const modifiedUser = await this.usersRepository.modifyUserById(body);
+    return { status: 200, success: true };
+  }
+
+  async updateUser(body) {
+    const updatedUser = await this.usersRepository.updateUserImage(body);
+    return { status: 200, success: true };
+  }
+
+  async getInfo(body) {
+    const infoUser = await this.usersRepository.getInfoUser(body);
+    return infoUser;
+  }
 }

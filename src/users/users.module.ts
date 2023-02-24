@@ -6,9 +6,11 @@ import { UsersService } from './users.service';
 import { UsersRepository } from './repository/user.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from 'src/auth/auth.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
+    MulterModule.register({ dest: './uploads' }),
     TypeOrmModule.forFeature([UsersEntity]),
     forwardRef(() => AuthModule),
     JwtModule,
