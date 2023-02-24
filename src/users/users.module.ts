@@ -15,17 +15,17 @@ import * as path from 'path';
 const multerOptionsFactory = (configService: ConfigService): MulterOptions => {
   // s3 인스턴스를 생성합니다.
   const s3 = new S3Client({
-    region: configService.get('AWS_BUCKET_REGION'),
+    region: process.env.AWS_BUCKET_REGION,
     credentials: {
-      accessKeyId: configService.get('AWS_ACCESS_KEY_ID'),
-      secretAccessKey: configService.get('AWS_SECRET_ACCESS_KEY'),
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
   });
 
   return {
     storage: multerS3({
       s3,
-      bucket: configService.get('AWS_BUCKET_NAME'),
+      bucket: process.env.AWS_BUCKET_NAME,
       key(_req, file, done) {
         const ext = path.extname(file.originalname); // 파일의 확장자 추출
         const basename = path.basename(file.originalname, ext); // 파일 이름
