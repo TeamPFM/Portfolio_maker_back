@@ -47,6 +47,7 @@ export class UsersController {
       profile?: Express.MulterS3.File[];
     },
   ) {
-    return null;
+    return files.profile;
+    // files.profile.location = 저장 위치
   }
 }
