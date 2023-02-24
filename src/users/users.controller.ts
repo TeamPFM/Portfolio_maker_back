@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  UploadedFiles,
-  UseGuards,
-  UseInterceptors,
-} from '@nestjs/common';
-import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
@@ -38,17 +29,5 @@ export class UsersController {
   @Get('info')
   findOne(@CurrentUser() user) {
     return user;
-  }
-
-  @Post('profile-image')
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'profile', maxCount: 1 }]))
-  async updateProfile(
-    @UploadedFiles()
-    files: {
-      profile?: Express.MulterS3.File[];
-    },
-  ) {
-    return files.profile;
-    // files.profile.location = 저장 위치
   }
 }

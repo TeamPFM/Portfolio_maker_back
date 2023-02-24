@@ -7,16 +7,7 @@ import { UsersEntity } from './entities/users.entity';
 
 @Injectable()
 export class UsersService {
-  private s3: AWS.S3;
-  private bucket: string;
-  constructor(private readonly usersRepository: UsersRepository) {
-    this.bucket = process.env.AWS_BUCKET_NAME;
-    this.s3 = new AWS.S3({
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      region: process.env.AWS_BUCKET_REGION,
-    });
-  }
+  constructor(private readonly usersRepository: UsersRepository) {}
 
   async createUser(body: CreateUsersDto) {
     const { email, name, password } = body;
@@ -32,16 +23,5 @@ export class UsersService {
       });
       return { status: 201, success: true };
     }
-  }
-  async deleteFile(users: UsersEntity) {
-    await this.s3
-      .deleteObjects({
-        Bucket: this.bucket,
-        Delete: {
-          Objects: [{ Key: users.imagePath }],
-          Quiet: false,
-        },
-      })
-      .promise();
   }
 }
