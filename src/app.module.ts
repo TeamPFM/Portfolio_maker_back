@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 import { UsersEntity } from './users/entities/users.entity';
 import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
+import { ProjectsModule } from './projects/projects.module';
+import { ProjectsEntity } from './projects/entities/projects.entity';
 
 @Module({
   imports: [
@@ -19,10 +21,11 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
       username: process.env.MYSQL_USERNAME,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,
-      entities: [UsersEntity],
+      entities: [UsersEntity, ProjectsEntity],
       synchronize: true,
     }),
     UsersModule,
+    ProjectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

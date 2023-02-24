@@ -2,6 +2,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUsersDto } from './dto/create-user.dto';
 import { UsersRepository } from './repository/user.repository';
 import * as bcrypt from 'bcrypt';
+import * as AWS from 'aws-sdk';
+import { UsersEntity } from './entities/users.entity';
 
 @Injectable()
 export class UsersService {
