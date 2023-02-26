@@ -6,23 +6,16 @@ import { CommentsRepository } from './repository/comment.repository';
 
 @Injectable()
 export class CommentsService {
-  constructor(private readonly commentssRepository: CommentsRepository) {}
+  constructor(private readonly commentsRepository: CommentsRepository) {}
 
   async createComment(user: UsersEntity, body: CreateCommentDto) {
-    const createdComment = await this.commentssRepository.create(user, body);
+    const createdComment = await this.commentsRepository.create(user, body);
     return { status: 201, success: true };
   }
 
-  findAll() {
-    return `This action returns all comment`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} comment`;
-  }
-
-  update(id: number, updateCommentDto: UpdateCommentDto) {
-    return `This action updates a #${id} comment`;
+  async update(id: number, user: UsersEntity, body: UpdateCommentDto) {
+    const updatedBoard = await this.commentsRepository.update(id, user, body);
+    return { status: 201, success: true };
   }
 
   remove(id: number) {

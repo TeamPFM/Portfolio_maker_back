@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
@@ -28,19 +29,14 @@ export class CommentsController {
     return this.commentService.createComment(user, body);
   }
 
-  @Get()
-  findAll() {
-    return this.commentService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.commentService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
-    return this.commentService.update(+id, updateCommentDto);
+  @UseGuards(JwtAuthGuard)
+  @Patch('/:id')
+  update(
+    @CurrentUser() user: UsersEntity,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateCommentDto,
+  ): Promise<{ status: number; success: boolean }> {
+    return this.commentService.update(id, user, body);
   }
 
   @Delete(':id')

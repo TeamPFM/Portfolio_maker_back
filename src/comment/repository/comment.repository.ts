@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UsersEntity } from 'src/users/entities/users.entity';
 import { Repository } from 'typeorm';
 import { CreateCommentDto } from '../dto/create-comment.dto';
+import { UpdateCommentDto } from '../dto/update-comment.dto';
 import { CommentsEntity } from '../entities/comment.entity';
 
 @Injectable()
@@ -21,7 +22,18 @@ export class CommentsRepository {
       };
       return this.commentsRepository.save(Comment);
     } catch (error) {
-      throw new InternalServerErrorException('error while create boards');
+      throw new InternalServerErrorException('error while create commets');
+    }
+  }
+
+  async update(id: number, user: UsersEntity, body: UpdateCommentDto) {
+    try {
+      const result = await this.commentsRepository.update(
+        { id, users: user },
+        body,
+      );
+    } catch (error) {
+      throw new InternalServerErrorException('error while update comments');
     }
   }
 }
