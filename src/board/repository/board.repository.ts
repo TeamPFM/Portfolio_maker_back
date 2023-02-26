@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateBoardDto } from '../dto/create-board.dto';
@@ -12,20 +12,28 @@ export class BoardsRepository {
   ) {}
 
   async create(body: CreateBoardDto) {
-    const Board = {
-      ...body,
-      users: { id: parseInt(body.user_id) },
-    };
-    return this.boardsRepository.save(Board);
+    try {
+      const Board = {
+        ...body,
+        users: { id: parseInt(body.user_id) },
+      };
+      return this.boardsRepository.save(Board);
+    } catch (error) {
+      throw new InternalServerErrorException('error while create boards');
+    }
   }
 
   async pagenate(id: number) {
-    const page = 10;
-    const result = await this.boardsRepository.find({
-      take: page * id,
-      skip: page * id,
-      relations: ['users'],
-    });
-    return result;
+    try {
+      const page = 10;
+      const result = await this.boardsRepository.find({
+        take: page * id,
+        skip: page * id,
+        relations: ['users'],
+      });
+      return result;
+    } catch (error) {
+      throw new InternalServerErrorException('error while create boards');
+    }
   }
 }

@@ -22,7 +22,9 @@ export class BoardsController {
 
   @UseGuards(JwtAuthGuard)
   @Post('')
-  createBoard(@ReqWithUserId() body: CreateBoardDto) {
+  createBoard(
+    @ReqWithUserId() body: CreateBoardDto,
+  ): Promise<{ status: number; success: boolean }> {
     return this.boardService.createBoard(body);
   }
 
