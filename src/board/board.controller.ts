@@ -47,8 +47,12 @@ export class BoardsController {
     return this.boardService.update(id, user, body);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.boardService.remove(+id);
+  @UseGuards(JwtAuthGuard)
+  @Delete('/:id')
+  async deleteProject(
+    @CurrentUser() user: UsersEntity,
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<{ status: number; success: boolean }> {
+    return this.boardService.deleteBoard(id, user);
   }
 }

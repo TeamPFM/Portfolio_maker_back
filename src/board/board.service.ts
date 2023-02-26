@@ -22,7 +22,8 @@ export class BoardsService {
     return { status: 201, success: true };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} board`;
+  async deleteBoard(id: number, user: UsersEntity) {
+    const deletedBox = await this.boardsRepository.delete(id, user);
+    return { status: 201, success: true };
   }
 }

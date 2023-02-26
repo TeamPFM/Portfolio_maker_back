@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersEntity } from 'src/users/entities/users.entity';
 import { Repository } from 'typeorm';
@@ -35,7 +39,7 @@ export class BoardsRepository {
       });
       return result;
     } catch (error) {
-      throw new InternalServerErrorException('error while create boards');
+      throw new NotFoundException('error while find boards');
     }
   }
 
@@ -45,6 +49,14 @@ export class BoardsRepository {
         { id, users: user },
         body,
       );
+    } catch (error) {
+      throw new InternalServerErrorException('error while update boards');
+    }
+  }
+
+  async delete(id: number, user: UsersEntity) {
+    try {
+      const result = await this.boardsRepository.delete({ id, users: user });
     } catch (error) {
       throw new InternalServerErrorException('error while create boards');
     }
