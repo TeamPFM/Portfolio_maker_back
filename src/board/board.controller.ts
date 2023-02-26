@@ -9,18 +9,19 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
+import { ReqWithUserId } from 'src/common/decorators/req_user_id.decorator';
 import { BoardsService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 
-@Controller('api/board')
+@Controller('api/boards')
 export class BoardsController {
   constructor(private readonly boardService: BoardsService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Post()
-  create(@Body() createBoardDto: CreateBoardDto) {
-    return this.boardService.create(createBoardDto);
+  @Post('')
+  createBoard(@ReqWithUserId() body: CreateBoardDto) {
+    return this.boardService.createBoard(body);
   }
 
   @Get()
