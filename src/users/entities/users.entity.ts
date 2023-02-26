@@ -1,5 +1,4 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { BoardsEntity } from 'src/board/entities/board.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import { ProjectsEntity } from 'src/projects/entities/projects.entity';
 import { Entity, Column, OneToMany } from 'typeorm';
@@ -36,7 +35,4 @@ export class UsersEntity extends CommonEntity {
 
   @OneToMany(() => ProjectsEntity, (projects) => projects.users)
   projects: ProjectsEntity[];
-
-  @OneToMany(() => ProjectsEntity, (boards) => boards.users)
-  boards: BoardsEntity[];
 }
