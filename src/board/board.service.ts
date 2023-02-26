@@ -12,8 +12,9 @@ export class BoardsService {
     return { status: 201, success: true };
   }
 
-  findAll() {
-    return `This action returns all board`;
+  async findPage(id: number) {
+    const pagenatedBoards = await this.boardsRepository.pagenate(id);
+    return pagenatedBoards;
   }
 
   findOne(id: number) {

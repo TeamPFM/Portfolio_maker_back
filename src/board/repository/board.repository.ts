@@ -18,4 +18,14 @@ export class BoardsRepository {
     };
     return this.boardsRepository.save(Board);
   }
+
+  async pagenate(id: number) {
+    const page = 10;
+    const result = await this.boardsRepository.find({
+      take: page * id,
+      skip: page * id,
+      relations: ['users'],
+    });
+    return result;
+  }
 }
