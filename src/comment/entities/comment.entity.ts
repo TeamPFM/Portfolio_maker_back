@@ -9,6 +9,8 @@ export class CommentsEntity extends CommonEntity {
   content: string;
   @ManyToOne(() => UsersEntity, (users) => users.comments)
   users: UsersEntity;
-  @ManyToOne(() => BoardsEntity, (boards) => boards.comments)
-  boards: UsersEntity;
+  @ManyToOne(() => BoardsEntity, (boards) => boards.comments, {
+    onDelete: 'CASCADE',
+  })
+  boards: BoardsEntity;
 }

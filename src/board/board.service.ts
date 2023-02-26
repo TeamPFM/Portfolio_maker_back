@@ -17,13 +17,19 @@ export class BoardsService {
     const pagenatedBoards = await this.boardsRepository.pagenate(id);
     return pagenatedBoards;
   }
+
+  async findIntoPage(id: number) {
+    const boardPage = await this.boardsRepository.findPage(id);
+    return boardPage;
+  }
+
   async update(id: number, user: UsersEntity, body: UpdateBoardDto) {
     const updatedBoard = await this.boardsRepository.update(id, user, body);
-    return { status: 201, success: true };
+    return { status: 200, success: true };
   }
 
   async deleteBoard(id: number, user: UsersEntity) {
     const deletedBox = await this.boardsRepository.delete(id, user);
-    return { status: 201, success: true };
+    return { status: 200, success: true };
   }
 }

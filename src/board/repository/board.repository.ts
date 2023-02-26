@@ -43,6 +43,20 @@ export class BoardsRepository {
     }
   }
 
+  async findPage(id: number) {
+    try {
+      const result = await this.boardsRepository.findOne({
+        where: {
+          id: id,
+        },
+        relations: ['comments'],
+      });
+      return result;
+    } catch (error) {
+      throw new NotFoundException('error while find boards');
+    }
+  }
+
   async update(id: number, user: UsersEntity, body: UpdateBoardDto) {
     try {
       const result = await this.boardsRepository.update(
@@ -57,8 +71,9 @@ export class BoardsRepository {
   async delete(id: number, user: UsersEntity) {
     try {
       const result = await this.boardsRepository.delete({ id, users: user });
+      return result.affected;
     } catch (error) {
-      throw new InternalServerErrorException('error while create boards');
+      throw new InternalServerErrorException('error while delete boards');
     }
   }
 }
