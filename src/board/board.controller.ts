@@ -9,13 +9,13 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
-import { BoardService } from './board.service';
+import { BoardsService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 
 @Controller('api/board')
-export class BoardController {
-  constructor(private readonly boardService: BoardService) {}
+export class BoardsController {
+  constructor(private readonly boardService: BoardsService) {}
 
   @UseGuards(JwtAuthGuard)
   @Post()

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { BoardService } from './board.service';
-import { BoardController } from './board.controller';
+import { BoardsService } from './board.service';
+import { BoardsController } from './board.controller';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -15,7 +15,7 @@ import { BoardsRepository } from './repository/board.repository';
       signOptions: { expiresIn: '1y' },
     }),
   ],
-  controllers: [BoardController],
-  providers: [BoardService, BoardsRepository, JwtAuthGuard],
+  controllers: [BoardsController],
+  providers: [BoardsService, BoardsRepository, JwtAuthGuard],
 })
 export class BoardModule {}

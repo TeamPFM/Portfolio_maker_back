@@ -9,6 +9,8 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { ProjectsModule } from './projects/projects.module';
 import { ProjectsEntity } from './projects/entities/projects.entity';
 import { CommentModule } from './comment/comment.module';
+import { BoardsEntity } from './board/entities/board.entity';
+import { CommentsEntity } from './comment/entities/comment.entity';
 
 @Module({
   imports: [
@@ -22,7 +24,7 @@ import { CommentModule } from './comment/comment.module';
       username: process.env.MYSQL_USERNAME,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,
-      entities: [UsersEntity, ProjectsEntity],
+      entities: [UsersEntity, ProjectsEntity, BoardsEntity, CommentsEntity],
       synchronize: true,
     }),
     UsersModule,

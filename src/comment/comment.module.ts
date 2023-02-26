@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { CommentService } from './comment.service';
-import { CommentController } from './comment.controller';
+import { CommentsService } from './comment.service';
+import { CommentsController } from './comment.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { CommentsRepository } from './repository/comment.repository';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
+import { CommentsEntity } from './entities/comment.entity';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
       signOptions: { expiresIn: '1y' },
     }),
   ],
-  controllers: [CommentController],
-  providers: [CommentService, CommentsRepository, JwtAuthGuard],
+  controllers: [CommentsController],
+  providers: [CommentsService, CommentsRepository, JwtAuthGuard],
 })
 export class CommentModule {}

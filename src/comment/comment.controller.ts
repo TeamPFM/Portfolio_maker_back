@@ -9,13 +9,13 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
-import { CommentService } from './comment.service';
+import { CommentsService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 
 @Controller('api/comment')
-export class CommentController {
-  constructor(private readonly commentService: CommentService) {}
+export class CommentsController {
+  constructor(private readonly commentService: CommentsService) {}
 
   @UseGuards(JwtAuthGuard)
   @Post()
