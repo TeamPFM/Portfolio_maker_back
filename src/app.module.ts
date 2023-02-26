@@ -8,6 +8,8 @@ import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { ProjectsModule } from './projects/projects.module';
 import { ProjectsEntity } from './projects/entities/projects.entity';
+import { BoardModule } from './board/board.module';
+import { BoardsEntity } from './board/entities/board.entity';
 
 @Module({
   imports: [
@@ -21,11 +23,12 @@ import { ProjectsEntity } from './projects/entities/projects.entity';
       username: process.env.MYSQL_USERNAME,
       password: process.env.MYSQL_PASSWORD,
       database: process.env.MYSQL_DATABASE,
-      entities: [UsersEntity, ProjectsEntity],
+      entities: [UsersEntity, ProjectsEntity, BoardsEntity],
       synchronize: true,
     }),
     UsersModule,
     ProjectsModule,
+    BoardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
