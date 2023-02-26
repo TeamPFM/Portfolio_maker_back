@@ -1,7 +1,9 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UsersEntity } from 'src/users/entities/users.entity';
 import { Repository } from 'typeorm';
 import { CreateBoardDto } from '../dto/create-board.dto';
+import { UpdateBoardDto } from '../dto/update-board.dto';
 import { BoardsEntity } from '../entities/board.entity';
 
 @Injectable()
@@ -11,11 +13,11 @@ export class BoardsRepository {
     private readonly boardsRepository: Repository<BoardsEntity>,
   ) {}
 
-  async create(body: CreateBoardDto) {
+  async create(user: UsersEntity, body: CreateBoardDto) {
     try {
       const Board = {
         ...body,
-        users: { id: parseInt(body.user_id) },
+        users: { id: user.id },
       };
       return this.boardsRepository.save(Board);
     } catch (error) {
@@ -32,6 +34,17 @@ export class BoardsRepository {
         relations: ['users'],
       });
       return result;
+    } catch (error) {
+      throw new InternalServerErrorException('error while create boards');
+    }
+  }
+
+  async update(id: number, user: UsersEntity, body: UpdateBoardDto) {
+    try {
+      const result = await this.boardsRepository.update(
+        { id, users: user },
+        body,
+      );
     } catch (error) {
       throw new InternalServerErrorException('error while create boards');
     }

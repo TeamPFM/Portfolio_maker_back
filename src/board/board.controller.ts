@@ -8,9 +8,11 @@ import {
   Delete,
   UseGuards,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
-import { ReqWithUserId } from 'src/common/decorators/req_user_id.decorator';
+import { CurrentUser } from 'src/common/decorators/user.decorator';
+import { UsersEntity } from 'src/users/entities/users.entity';
 import { BoardsService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
@@ -23,20 +25,26 @@ export class BoardsController {
   @UseGuards(JwtAuthGuard)
   @Post('')
   createBoard(
-    @ReqWithUserId() body: CreateBoardDto,
+    @CurrentUser() user: UsersEntity,
+    @Body() body: CreateBoardDto,
   ): Promise<{ status: number; success: boolean }> {
-    return this.boardService.createBoard(body);
+    return this.boardService.createBoard(user, body);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('')
-  findPage(@Query('id') id: string): Promise<BoardsEntity[]> {
-    return this.boardService.findPage(+id);
+  findPage(@Query('id', ParseIntPipe) id: number): Promise<BoardsEntity[]> {
+    return this.boardService.findPage(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBoardDto: UpdateBoardDto) {
-    return this.boardService.update(+id, updateBoardDto);
+  @UseGuards(JwtAuthGuard)
+  @Patch('/:id')
+  update(
+    @CurrentUser() user: UsersEntity,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateBoardDto,
+  ): Promise<{ status: number; success: boolean }> {
+    return this.boardService.update(id, user, body);
   }
 
   @Delete(':id')
