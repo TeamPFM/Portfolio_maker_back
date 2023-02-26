@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
 import { ProjectsModule } from './projects/projects.module';
 import { ProjectsEntity } from './projects/entities/projects.entity';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ProjectsEntity } from './projects/entities/projects.entity';
     }),
     UsersModule,
     ProjectsModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
