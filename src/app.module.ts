@@ -11,6 +11,7 @@ import { ProjectsEntity } from './projects/entities/projects.entity';
 import { CommentModule } from './comment/comment.module';
 import { BoardsEntity } from './board/entities/board.entity';
 import { CommentsEntity } from './comment/entities/comment.entity';
+import { BoardModule } from './board/board.module';
 
 @Module({
   imports: [
@@ -29,6 +30,8 @@ import { CommentsEntity } from './comment/entities/comment.entity';
     }),
     UsersModule,
     ProjectsModule,
+    CommentModule,
+    BoardModule,
     CommentModule,
   ],
   controllers: [AppController],
