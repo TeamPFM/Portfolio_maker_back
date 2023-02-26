@@ -36,4 +36,12 @@ export class CommentsRepository {
       throw new InternalServerErrorException('error while update comments');
     }
   }
+
+  async delete(id: number, user: UsersEntity) {
+    try {
+      const result = await this.commentsRepository.delete({ id, users: user });
+    } catch (error) {
+      throw new InternalServerErrorException('error while update comments');
+    }
+  }
 }

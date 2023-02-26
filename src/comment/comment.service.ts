@@ -15,10 +15,11 @@ export class CommentsService {
 
   async update(id: number, user: UsersEntity, body: UpdateCommentDto) {
     const updatedBoard = await this.commentsRepository.update(id, user, body);
-    return { status: 201, success: true };
+    return { status: 200, success: true };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} comment`;
+  async deleteComment(id: number, user: UsersEntity) {
+    const deletedComment = await this.commentsRepository.delete(id, user);
+    return { status: 200, success: true };
   }
 }

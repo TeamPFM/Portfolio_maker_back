@@ -39,8 +39,12 @@ export class CommentsController {
     return this.commentService.update(id, user, body);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commentService.remove(+id);
+  @UseGuards(JwtAuthGuard)
+  @Delete('/:id')
+  async deleteProject(
+    @CurrentUser() user: UsersEntity,
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<{ status: number; success: boolean }> {
+    return this.commentService.deleteComment(id, user);
   }
 }
