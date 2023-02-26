@@ -38,6 +38,12 @@ export class BoardsController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('/:id')
+  findIntoPage(@Param('id', ParseIntPipe) id: number): Promise<BoardsEntity> {
+    return this.boardService.findIntoPage(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Patch('/:id')
   update(
     @CurrentUser() user: UsersEntity,
