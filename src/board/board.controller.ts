@@ -28,6 +28,7 @@ export class BoardsController {
     return this.boardService.createBoard(body);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('')
   findPage(@Query('id') id: string): Promise<BoardsEntity[]> {
     return this.boardService.findPage(+id);
