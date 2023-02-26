@@ -9,18 +9,23 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
+import { CurrentUser } from 'src/common/decorators/user.decorator';
+import { UsersEntity } from 'src/users/entities/users.entity';
 import { CommentsService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 
-@Controller('api/comment')
+@Controller('api/comments')
 export class CommentsController {
   constructor(private readonly commentService: CommentsService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Post()
-  create(@Body() createCommentDto: CreateCommentDto): string {
-    return this.commentService.create(createCommentDto);
+  @Post('')
+  createBoard(
+    @CurrentUser() user: UsersEntity,
+    @Body() body: CreateCommentDto,
+  ): Promise<{ status: number; success: boolean }> {
+    return this.commentService.createComment(user, body);
   }
 
   @Get()
