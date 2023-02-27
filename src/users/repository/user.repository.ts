@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUsersDto } from '../dto/create-user.dto';
@@ -23,11 +27,57 @@ export class UsersRepository {
   async findUserByIdWithoutPassword(
     userId: string,
   ): Promise<UsersEntity | null> {
-    const id = parseInt(userId, 10);
-    const user = await this.userRepository.findOne({
-      select: ['id', 'email', 'name'],
-      where: { id },
-    });
-    return user;
+    try {
+      const id = parseInt(userId, 10);
+      const user = await this.userRepository.findOne({
+        select: ['id', 'email', 'name'],
+        where: { id },
+      });
+      return user;
+    } catch (error) {
+      throw new NotFoundException('error while update user');
+    }
+  }
+
+  async modifyUserById(body) {
+    try {
+      const { about, link, phone, name } = body;
+      const user = await this.userRepository.update(body.user_id, {
+        about,
+        link,
+        phone,
+        name,
+      });
+    } catch (error) {
+      throw new InternalServerErrorException('error while saving user');
+    }
+  }
+
+  async updateUserImage(body) {
+    try {
+      const { imagePath, imageName } = body;
+      const user = await this.userRepository.update(body.user_id, {
+        imageName,
+        imagePath,
+      });
+    } catch (error) {
+      throw new InternalServerErrorException('error while saving user');
+    }
+  }
+
+  async getInfoUser(body) {
+    try {
+      const user = await this.userRepository.findOne({
+        where: { id: body.user_id },
+        relations: ['skills'],
+      });
+      delete user.password;
+      delete user.createdAt;
+      delete user.updatedAt;
+      delete user.deletedAt;
+      return user;
+    } catch (error) {
+      throw new NotFoundException('error while update user');
+    }
   }
 }

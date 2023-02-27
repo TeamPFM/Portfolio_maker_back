@@ -2,10 +2,16 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUsersDto } from './dto/create-user.dto';
 import { UsersRepository } from './repository/user.repository';
 import * as bcrypt from 'bcrypt';
+import { SkillsRepository } from './repository/skill.repository';
+import { SkillsEntity } from './entities/skills.entity';
+import { UsersEntity } from './entities/users.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(
+    private readonly usersRepository: UsersRepository,
+    private readonly skillsRepository: SkillsRepository,
+  ) {}
 
   async createUser(body: CreateUsersDto) {
     const { email, name, password } = body;
@@ -21,5 +27,29 @@ export class UsersService {
       });
       return { status: 201, success: true };
     }
+  }
+
+  async modify(body) {
+    const skills: string[] = body.skill.split(',');
+    const user: UsersEntity = await this.getInfo(body);
+    await this.skillsRepository.deleteByUser(user);
+    const skillsEntity: SkillsEntity[] = this.skillsRepository.create(
+      skills,
+      user,
+    );
+    await this.skillsRepository.update(skillsEntity);
+
+    const modifiedUser = await this.usersRepository.modifyUserById(body);
+    return { status: 200, success: true };
+  }
+
+  async updateUser(body) {
+    const updatedUser = await this.usersRepository.updateUserImage(body);
+    return { status: 200, success: true };
+  }
+
+  async getInfo(body) {
+    const infoUser = await this.usersRepository.getInfoUser(body);
+    return infoUser;
   }
 }

@@ -1,7 +1,10 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { BoardsEntity } from 'src/board/entities/board.entity';
+import { CommentsEntity } from 'src/comment/entities/comment.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import { ProjectsEntity } from 'src/projects/entities/projects.entity';
 import { Entity, Column, OneToMany } from 'typeorm';
+import { SkillsEntity } from './skills.entity';
 
 @Entity()
 export class UsersEntity extends CommonEntity {
@@ -35,4 +38,12 @@ export class UsersEntity extends CommonEntity {
 
   @OneToMany(() => ProjectsEntity, (projects) => projects.users)
   projects: ProjectsEntity[];
+
+  @OneToMany(() => BoardsEntity, (boards) => boards.users)
+  boards: BoardsEntity[];
+
+  @OneToMany(() => CommentsEntity, (comments) => comments.users)
+  comments: CommentsEntity[];
+  @OneToMany(() => SkillsEntity, (skills) => skills.users)
+  skills: SkillsEntity[];
 }
