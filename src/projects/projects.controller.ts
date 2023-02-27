@@ -8,10 +8,14 @@ import {
   Post,
   Put,
   Query,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
+import { multerOptions } from 'src/common/utils/multer.options';
 import { UsersEntity } from 'src/users/entities/users.entity';
 import { CreateProject } from './dto/create-project.dto';
 import { UpdateProject } from './dto/update-project.dto';
@@ -23,11 +27,13 @@ export class ProjectsController {
 
   @UseGuards(JwtAuthGuard)
   @Post('')
+  @UseInterceptors(FileInterceptor('file', multerOptions('')))
   async createProject(
+    @UploadedFile() file: Express.Multer.File,
     @CurrentUser() user: UsersEntity,
-    @Body('project') createProject: CreateProject,
+    @Body('') createProject: CreateProject,
   ) {
-    await this.projectService.createProject(user, createProject);
+    await this.projectService.createProject(user, createProject, file);
     return { status: 201, success: true };
   }
 

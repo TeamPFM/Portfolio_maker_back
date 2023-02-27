@@ -11,10 +11,13 @@ export class ProjectsService {
   async createProject(
     user: UsersEntity,
     createProject: CreateProject,
+    file: Express.Multer.File,
   ): Promise<void> {
     const projects: ProjectsEntity =
       this.projectsRepository.create(createProject);
     projects.users = user;
+    projects.imageName = file?.filename;
+    projects.imagePath = file?.path;
     await this.projectsRepository.save(projects);
   }
   async getProjects(userId: number): Promise<ProjectsEntity[]> {
