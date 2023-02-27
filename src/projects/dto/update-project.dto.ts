@@ -7,4 +7,6 @@ export class UpdateProject {
   description: string;
   @IsString()
   link: string;
+  imagePath: string;
+  imageName: string;
 }

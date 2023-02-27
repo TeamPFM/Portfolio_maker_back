@@ -55,15 +55,18 @@ export class ProjectsController {
 
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
+  @UseInterceptors(FileInterceptor('file', multerOptions('')))
   async updateProject(
+    @UploadedFile() file: Express.Multer.File,
     @CurrentUser() user: UsersEntity,
     @Param('id', ParseIntPipe) id: number,
-    @Body('project') updateProject: UpdateProject,
+    @Body('') updateProject: UpdateProject,
   ) {
     const success = await this.projectService.updateProject(
       user,
       id,
       updateProject,
+      file,
     );
     return { status: 200, success };
   }
