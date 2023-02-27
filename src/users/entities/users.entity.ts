@@ -4,6 +4,7 @@ import { CommentsEntity } from 'src/comment/entities/comment.entity';
 import { CommonEntity } from 'src/common/entities/common.entity';
 import { ProjectsEntity } from 'src/projects/entities/projects.entity';
 import { Entity, Column, OneToMany } from 'typeorm';
+import { SkillsEntity } from './skills.entity';
 
 @Entity()
 export class UsersEntity extends CommonEntity {
@@ -43,4 +44,6 @@ export class UsersEntity extends CommonEntity {
 
   @OneToMany(() => CommentsEntity, (comments) => comments.users)
   comments: CommentsEntity[];
+  @OneToMany(() => SkillsEntity, (skills) => skills.users)
+  skills: SkillsEntity[];
 }
