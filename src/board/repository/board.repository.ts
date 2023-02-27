@@ -35,6 +35,7 @@ export class BoardsRepository {
       const result = await this.boardsRepository.find({
         take: page * id,
         skip: page * id,
+        order: { id: 'DESC' },
         relations: ['users'],
       });
       return result;
