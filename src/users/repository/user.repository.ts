@@ -41,11 +41,12 @@ export class UsersRepository {
 
   async modifyUserById(body) {
     try {
-      const { about, link, phone } = body;
+      const { about, link, phone, name } = body;
       const user = await this.userRepository.update(body.user_id, {
         about,
         link,
         phone,
+        name,
       });
     } catch (error) {
       throw new InternalServerErrorException('error while saving user');
