@@ -17,7 +17,7 @@ export class AllExceptionFiller implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse<Response>();
     const req = ctx.getRequest<Request>();
-
+    const stack = exception.stack;
     if (!(exception instanceof HttpException)) {
       exception = new InternalServerErrorException();
     }
@@ -31,7 +31,7 @@ export class AllExceptionFiller implements ExceptionFilter {
     };
     this.logger.error(
       `${log.timestamp} ${exception.name} url: ${log.url}`,
-      exception.stack,
+      stack,
       'AllExceptionFiller',
     );
     res.status((exception as HttpException).getStatus()).json(response);
