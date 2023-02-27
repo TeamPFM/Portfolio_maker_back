@@ -5,6 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as path from 'path';
 import { winstonLogger } from './common/utils/logger.winston';
+import { AllExceptionFiller } from './common/exception/exception.fillter';
 
 async function bootstrap() {
   dotenv.config();
@@ -19,6 +20,7 @@ async function bootstrap() {
     origin: true,
     credentials: true,
   });
+  app.useGlobalFilters(new AllExceptionFiller(winstonLogger));
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(5000);
 }
