@@ -10,10 +10,10 @@ export class ProjectsEntity extends CommonEntity {
   description: string;
   @Column({ type: 'varchar', name: 'link' })
   link: string;
-  @Column({ type: 'varchar', name: 'image_path' })
+  @Column({ type: 'varchar', name: 'image_path', nullable: true })
   imagePath: string;
 
-  @Column({ type: 'varchar', name: 'image_name' })
+  @Column({ type: 'varchar', name: 'image_name', nullable: true })
   imageName: string;
   @ManyToOne(() => UsersEntity, (users) => users.projects)
   users: UsersEntity;
