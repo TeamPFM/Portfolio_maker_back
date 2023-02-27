@@ -52,4 +52,9 @@ export class UsersService {
     const infoUser = await this.usersRepository.getInfoUser(body);
     return infoUser;
   }
+
+  async remove(id: number) {
+    const deleteUser = await this.usersRepository.remove(id);
+    return { status: 200, success: true };
+  }
 }

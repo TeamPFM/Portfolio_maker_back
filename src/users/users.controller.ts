@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Patch,
   Post,
@@ -13,8 +14,10 @@ import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
 import { ReqWithUserId } from 'src/common/decorators/req_user_id.decorator';
+import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { multerOptions } from 'src/common/utils/multer.options';
 import { CreateUsersDto } from './dto/create-user.dto';
+import { UsersEntity } from './entities/users.entity';
 import { UsersService } from './users.service';
 
 @Controller('api/users')
@@ -59,5 +62,11 @@ export class UsersController {
   @Post('img/update')
   update(@ReqWithUserId() body) {
     return this.usersService.updateUser(body);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('/')
+  deleteUser(@CurrentUser() user: UsersEntity) {
+    return this.usersService.remove(user.id);
   }
 }

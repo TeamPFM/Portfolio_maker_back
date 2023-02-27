@@ -80,4 +80,13 @@ export class UsersRepository {
       throw new NotFoundException('error while update user');
     }
   }
+
+  async remove(id: number) {
+    try {
+      console.log(id);
+      return await this.userRepository.delete(id);
+    } catch (error) {
+      throw new InternalServerErrorException('error while deleting user');
+    }
+  }
 }
