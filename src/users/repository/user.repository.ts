@@ -69,6 +69,7 @@ export class UsersRepository {
     try {
       const user = await this.userRepository.findOne({
         where: { id: body.user_id },
+        relations: ['skills'],
       });
       delete user.password;
       delete user.createdAt;

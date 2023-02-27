@@ -13,7 +13,6 @@ import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
 import { ReqWithUserId } from 'src/common/decorators/req_user_id.decorator';
-import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { multerOptions } from 'src/common/utils/multer.options';
 import { CreateUsersDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
