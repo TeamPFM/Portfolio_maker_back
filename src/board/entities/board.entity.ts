@@ -11,6 +11,6 @@ export class BoardsEntity extends CommonEntity {
   content: string;
   @ManyToOne(() => UsersEntity, (users) => users.boards)
   users: UsersEntity;
-  @OneToMany(() => CommentsEntity, (comments) => comments.users)
+  @OneToMany(() => CommentsEntity, (comments) => comments.boards)
   comments: CommentsEntity[];
 }
