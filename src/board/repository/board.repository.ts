@@ -33,7 +33,7 @@ export class BoardsRepository {
     try {
       const page = 10;
       const result = await this.boardsRepository.find({
-        take: page * id,
+        take: 10,
         skip: page * id,
         order: { id: 'DESC' },
         relations: ['users'],
