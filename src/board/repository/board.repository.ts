@@ -50,7 +50,13 @@ export class BoardsRepository {
         where: {
           id: id,
         },
-        relations: ['comments'],
+        join: {
+          alias: 'boards',
+          leftJoinAndSelect: {
+            comments: 'boards.comments',
+            users: 'comments.users',
+          },
+        },
       });
       return result;
     } catch (error) {
