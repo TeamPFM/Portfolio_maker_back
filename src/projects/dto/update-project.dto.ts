@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class UpdateProject {
   @IsString()
@@ -7,6 +7,10 @@ export class UpdateProject {
   description: string;
   @IsString()
   link: string;
+  @IsOptional()
+  @IsString()
   imagePath: string;
+  @IsOptional()
+  @IsString()
   imageName: string;
 }
