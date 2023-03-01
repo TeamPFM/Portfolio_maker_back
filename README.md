@@ -2,7 +2,7 @@
 
 Portfolio Page 1
 
-<img width="946" alt="포트폴리오1" src="https://user-images.githubusercontent.com/98637739/222241025-d0568591-40bc-4287-b817-c7d807b9f9d6.png">
+![image](https://user-images.githubusercontent.com/98637739/222246569-c3fc8fca-1783-4c06-9ed6-d5d28db69422.png)
 
 Portfolio Page 2
 
