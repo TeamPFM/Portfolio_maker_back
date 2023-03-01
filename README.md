@@ -56,6 +56,12 @@ Froentend(React.js) - [Froentend Github](https://github.com/TeamPFM/Portfolio_ma
 
 ---
 
+# Git Branching
+
+
+
+---
+
 # Architecture
 
 ![image](https://user-images.githubusercontent.com/98637739/222233439-1f6401dc-c393-4693-afca-22e655cd3e95.png)
