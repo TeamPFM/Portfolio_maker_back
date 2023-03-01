@@ -27,13 +27,11 @@ export class ProjectsController {
 
   @UseGuards(JwtAuthGuard)
   @Post('')
-  @UseInterceptors(FileInterceptor('file', multerOptions('')))
   async createProject(
-    @UploadedFile() file: Express.Multer.File,
     @CurrentUser() user: UsersEntity,
     @Body('') createProject: CreateProject,
   ) {
-    await this.projectService.createProject(user, createProject, file);
+    await this.projectService.createProject(user, createProject);
     return { status: 201, success: true };
   }
 
@@ -55,9 +53,7 @@ export class ProjectsController {
 
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
-  @UseInterceptors(FileInterceptor('file', multerOptions('')))
   async updateProject(
-    @UploadedFile() file: Express.Multer.File,
     @CurrentUser() user: UsersEntity,
     @Param('id', ParseIntPipe) id: number,
     @Body('') updateProject: UpdateProject,
@@ -66,8 +62,13 @@ export class ProjectsController {
       user,
       id,
       updateProject,
-      file,
     );
     return { status: 200, success };
+  }
+  @UseGuards(JwtAuthGuard)
+  @Post('img')
+  @UseInterceptors(FileInterceptor('img', multerOptions('')))
+  async uploadProjectImage(@UploadedFile() img: Express.Multer.File) {
+    return { imagePath: img.path, imageName: img.filename };
   }
 }

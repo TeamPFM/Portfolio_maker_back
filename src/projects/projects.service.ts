@@ -11,13 +11,10 @@ export class ProjectsService {
   async createProject(
     user: UsersEntity,
     createProject: CreateProject,
-    file: Express.Multer.File,
   ): Promise<void> {
     const projects: ProjectsEntity =
       this.projectsRepository.create(createProject);
     projects.users = user;
-    projects.imageName = file?.filename;
-    projects.imagePath = file?.path;
     await this.projectsRepository.save(projects);
   }
   async getProjects(userId: number): Promise<ProjectsEntity[]> {
@@ -34,11 +31,7 @@ export class ProjectsService {
     user: UsersEntity,
     id: number,
     updateProject: UpdateProject,
-    file: Express.Multer.File,
   ): Promise<boolean> {
-    updateProject.imageName =
-      file?.filename === undefined ? null : file.filename;
-    updateProject.imagePath = file?.path === undefined ? null : file.path;
     const result: number = await this.projectsRepository.updateProjectById(
       user,
       id,
