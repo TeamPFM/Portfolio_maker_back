@@ -8,10 +8,13 @@ Portfolio Page 2
 
 <img width="946" alt="포트폴리오3" src="https://user-images.githubusercontent.com/98637739/222241539-07f8309a-4ec6-4d01-a913-7e8c56f52f52.png">
 
-Board Page
+Board Page 1
 
 <img width="946" alt="Board" src="https://user-images.githubusercontent.com/98637739/222241886-7f5af1a2-2b8d-48d7-89bf-21239f4e1562.png">
 
+Board Page 2
+
+<img width="473" alt="image" src="https://user-images.githubusercontent.com/98637739/222263086-f1cd740a-075b-4b32-b951-9be3280ffc38.png">
 
 ---
 
