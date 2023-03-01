@@ -54,7 +54,7 @@ export class BoardsRepository {
 
   async findPage(id: number) {
     try {
-      const result = await this.boardsRepository.findOne({
+      const result: any = await this.boardsRepository.findOne({
         where: {
           id: id,
         },
@@ -65,8 +65,15 @@ export class BoardsRepository {
             users: 'comments.users',
           },
         },
+        relations: ['users'],
       });
-      return result;
+      const { users, ...boardData } = result;
+      const { password, ...usersData } = users;
+      const newResult = {
+        ...boardData,
+        users: usersData,
+      };
+      return newResult;
     } catch (error) {
       throw new NotFoundException('error while find boards');
     }
