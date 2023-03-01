@@ -58,7 +58,25 @@ Froentend(React.js) - [Froentend Github](https://github.com/TeamPFM/Portfolio_ma
 
 # Git Branching
 
+Git Flow 전략을 적극적으로 활용하여 효율적으로 협업하였습니다.
 
+<details>
+<summary>Git Flow</summary>
+<div markdown="1">
+
+<img width="268" alt="image" src="https://user-images.githubusercontent.com/98637739/222243861-cede10fd-48be-4653-acfc-d4b9c680b16a.png">
+
+</div>
+</details>
+
+<details>
+<summary>Source Tree</summary>
+<div markdown="1">
+
+<img width="427" alt="image" src="https://user-images.githubusercontent.com/98637739/222243324-998e87ac-4958-4c87-a293-c6ed4ad22cdb.png">
+
+</div>
+</details>
 
 ---
 
