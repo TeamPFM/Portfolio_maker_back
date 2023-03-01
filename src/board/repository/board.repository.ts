@@ -32,13 +32,21 @@ export class BoardsRepository {
   async pagenate(id: number) {
     try {
       const page = 10;
-      const result = await this.boardsRepository.find({
+      const result: any = await this.boardsRepository.find({
         take: 10,
         skip: page * id,
         order: { id: 'DESC' },
         relations: ['users'],
       });
-      return result;
+      const newResult = result.map((board: any) => {
+        const { users, ...boardData } = board;
+        const { password, ...userData } = users;
+        return {
+          ...boardData,
+          users: userData,
+        };
+      });
+      return newResult;
     } catch (error) {
       throw new NotFoundException('error while find boards');
     }
