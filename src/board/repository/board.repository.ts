@@ -67,13 +67,27 @@ export class BoardsRepository {
         },
         relations: ['users'],
       });
+      // Delete users.password
       const { users, ...boardData } = result;
       const { password, ...usersData } = users;
-      const newResult = {
+      const newUserResult = {
         ...boardData,
         users: usersData,
       };
-      return newResult;
+      // Delete comments.users.password
+      const newCommentResult = {
+        ...newUserResult,
+        comments: newUserResult.comments.map((comment: any) => {
+          const { users, ...commentData } = comment;
+          const { password, ...usersData } = users;
+          return {
+            ...commentData,
+            users: usersData,
+          };
+        }),
+      };
+      return newCommentResult;
+      return newUserResult;
     } catch (error) {
       throw new NotFoundException('error while find boards');
     }
