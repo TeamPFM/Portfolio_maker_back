@@ -89,4 +89,20 @@ export class UsersRepository {
       throw new InternalServerErrorException('error while deleting user');
     }
   }
+
+  async getInfoUserResume(id: number) {
+    try {
+      const user = await this.userRepository.findOne({
+        where: { id: id },
+        relations: ['skills'],
+      });
+      delete user.password;
+      delete user.createdAt;
+      delete user.updatedAt;
+      delete user.deletedAt;
+      return user;
+    } catch (error) {
+      throw new InternalServerErrorException('error while deleting user');
+    }
+  }
 }

@@ -3,8 +3,11 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
+  ParseIntPipe,
   Patch,
   Post,
+  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -45,9 +48,14 @@ export class UsersController {
     return this.usersService.getInfo(body);
   }
 
+  @Get('info/:id')
+  findOneResume(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.getInfoResume(id);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Patch('update')
-  modify(@ReqWithUserId() body) {
+  modify(@Query() body) {
     return this.usersService.modify(body);
   }
 

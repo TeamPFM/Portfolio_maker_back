@@ -53,6 +53,11 @@ export class UsersService {
     return infoUser;
   }
 
+  async getInfoResume(id: number) {
+    const infoUser = await this.usersRepository.getInfoUserResume(id);
+    return infoUser;
+  }
+
   async remove(id: number) {
     const deleteUser = await this.usersRepository.remove(id);
     return { status: 200, success: true };
