@@ -38,7 +38,6 @@ export class UsersService {
       user,
     );
     await this.skillsRepository.update(skillsEntity);
-
     const modifiedUser = await this.usersRepository.modifyUserById(body);
     return { status: 200, success: true };
   }

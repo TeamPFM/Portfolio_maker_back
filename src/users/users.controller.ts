@@ -55,7 +55,7 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Patch('update')
-  modify(@Query() body) {
+  modify(@ReqWithUserId() body) {
     return this.usersService.modify(body);
   }
 
