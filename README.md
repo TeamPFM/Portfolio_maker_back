@@ -27,9 +27,9 @@ Board Page
 
 # 팀원 소개
 
-[Team Notion Page]()
+[Team Notion Page](https://worried-parrotfish-2f5.notion.site/PortFolio-Maker-b86ebb8ca6b64e8ebf665a12757d163f)
 
-Backend(Nest.js) - [Backend Github]()
+Backend(Nest.js) - [Backend Github](https://github.com/TeamPFM/Portfolio_maker_back)
 
 [Postman Document](https://documenter.getpostman.com/view/25353027/2s93CNPDiT)
 
@@ -37,13 +37,13 @@ Backend(Nest.js) - [Backend Github]()
 
 - 박주현: https://github.com/Zero-Human
 
-Froentend(React.js) - [Froentend Github]()
+Froentend(React.js) - [Froentend Github](https://github.com/TeamPFM/Portfolio_maker_front)
 
 <details>
 <summary>Figma</summary>
 <div markdown="1">
 
-Figma Image
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/98637739/222242447-b09fe0f8-d260-4d72-a2cc-86ec8072017e.png">
 
 </div>
 </details>
