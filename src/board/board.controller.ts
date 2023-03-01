@@ -31,13 +31,11 @@ export class BoardsController {
     return this.boardService.createBoard(user, body);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('')
   findPage(@Query('id', ParseIntPipe) id: number): Promise<BoardsEntity[]> {
     return this.boardService.findPage(id);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('/:id')
   findIntoPage(@Param('id', ParseIntPipe) id: number): Promise<BoardsEntity> {
     return this.boardService.findIntoPage(id);
