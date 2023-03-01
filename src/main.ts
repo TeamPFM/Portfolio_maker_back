@@ -6,6 +6,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as path from 'path';
 import { winstonLogger } from './common/utils/logger.winston';
 import { AllExceptionFiller } from './common/exception/exception.fillter';
+import helmet from 'helmet';
 
 async function bootstrap() {
   dotenv.config();
@@ -15,7 +16,7 @@ async function bootstrap() {
   app.useStaticAssets(path.join(__dirname, '../', 'uploads'), {
     prefix: '/img',
   });
-
+  app.use(helmet());
   app.enableCors({
     origin: true,
     credentials: true,
