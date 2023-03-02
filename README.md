@@ -1,8 +1,22 @@
-# Project : Portfolio Maker | 22.02 ~ 22.03
+# Project : Portfolio Maker
+### 📆 22.02 ~ 22.03
+
+<br>  
+
+## Demo Image  
+
+Signup Page 
+
+<img width="946" alt="image" src="https://user-images.githubusercontent.com/58792751/222392565-a0c2ba81-5f23-4f5b-9cd3-84a45049c0a5.png">
+
+Login Page  
+
+<img width="946" alt="image" src="https://user-images.githubusercontent.com/58792751/222393775-23dcc8ef-9805-4368-934a-e593f23124cc.png">
 
 Portfolio Page 1
 
-![image](https://user-images.githubusercontent.com/98637739/222246569-c3fc8fca-1783-4c06-9ed6-d5d28db69422.png)
+<img width="946" alt="image" src="https://user-images.githubusercontent.com/58792751/222400718-fc331ba4-c00d-45ba-9fe6-3889b9abffe2.png">
+
 
 Portfolio Page 2
 
@@ -14,7 +28,7 @@ Board Page 1
 
 Board Page 2
 
-<img width="473" alt="image" src="https://user-images.githubusercontent.com/98637739/222263086-f1cd740a-075b-4b32-b951-9be3280ffc38.png">
+<img width="946" alt="image" src="https://user-images.githubusercontent.com/98637739/222263086-f1cd740a-075b-4b32-b951-9be3280ffc38.png">
 
 ---
 
@@ -87,6 +101,15 @@ Git Flow 전략을 적극적으로 활용하여 효율적으로 협업하였습�
 
 ![image](https://user-images.githubusercontent.com/98637739/222233439-1f6401dc-c393-4693-afca-22e655cd3e95.png)
 
+Git Action을 이용해 CI/CD 파이프라인을 구축하였습니다.
+
+Docker를 이용해 Server와 DB를 컨테이너화 하여 EC2 서비스에 업로드 했습니다.
+
+RDS를 이용해 Server의 예상치 못한 종료에 대비해 DB 클라우드화를 했습니다.
+
+Winston과 Daily Logger를 이용해 Log 파일을 관리하도록 했습니다.
+
+Grafana와 CloudWatch를 이용해 인프라 모니터링 체계를 구축 했습니다 (비용문제로 현재는 삭제)
 
 ---
 
@@ -108,6 +131,18 @@ Git Flow 전략을 적극적으로 활용하여 효율적으로 협업하였습�
 
 - Security: Helmet (6.0.1)
 
-## Frontend: React.js
+## Frontend: React.js (18.0.0)
 
-
+ - Typescript (4.6.3)
+ 
+ - React Router (6.8.1)
+ 
+ - Axios (1.3.3)
+ 
+ - Tailwindcss (3.2.6)
+ 
+ - React Query (4.24.10)
+ 
+ - Zustand (3.7.2)
+ 
+ - framer-motion (9.0.3)
