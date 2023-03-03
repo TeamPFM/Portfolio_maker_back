@@ -5,6 +5,8 @@
 
 ## Demo Image  
 
+Front Page
+
 <img width="946" alt="image" src="https://user-images.githubusercontent.com/98637739/222773602-f156c90d-013c-4e11-b8b5-9ed49d972409.gif">
 
 Signup Page 
