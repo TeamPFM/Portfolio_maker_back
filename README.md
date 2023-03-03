@@ -99,7 +99,7 @@ Git Flow 전략을 적극적으로 활용하여 효율적으로 협업하였습�
 
 # Architecture
 
-![image](https://user-images.githubusercontent.com/98637739/222233439-1f6401dc-c393-4693-afca-22e655cd3e95.png)
+<img width="578" alt="pfm-server" src="https://user-images.githubusercontent.com/98637739/222732950-1d356ea8-82ed-42ef-805a-7e7721c80fe1.png">
 
 Git Action을 이용해 CI/CD 파이프라인을 구축하였습니다.
 
