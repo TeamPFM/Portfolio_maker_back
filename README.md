@@ -30,7 +30,7 @@ https://documenter.getpostman.com/view/25353027/2s93CNPDiT
 
 <img width="578" alt="pfm-server" src="https://user-images.githubusercontent.com/98637739/222732950-1d356ea8-82ed-42ef-805a-7e7721c80fe1.png">
 
-Git Action을 이용해 CI/CD 파이프라인을 구축하였습니다.
+Github Actions를 이용해 CI/CD 파이프라인을 구축하였습니다.
 
 Docker를 이용해 Server와 DB를 컨테이너화 하여 EBS 서비스에 업로드 했습니다.
 
