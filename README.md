@@ -1,9 +1,58 @@
 # Project : Portfolio Maker
 ### 📆 22.02 ~ 22.03
 
-<br>  
+# Portfolio-maker 목차
 
-## Demo Image  
+1. [프런트엔드 페이지 주소](#프런트엔드-페이지-주소)
+2. [Postman API 배포 주소](#postman-api-배포-주소)
+3. [Architecture](#architecture)
+4. [서비스 소개](#서비스-소개)
+5. [Demo Image](#demo-image)
+6. [팀원 소개](#팀원-소개)
+7. [Git Branching](#git-branching)
+8. [사용 기술](#사용-기술)
+
+---
+
+# 프런트엔드 페이지 주소
+
+https://github.com/TeamPFM/Portfolio_maker_front
+
+---
+
+# Postman API 배포 주소
+
+https://documenter.getpostman.com/view/25353027/2s93CNPDiT
+
+---
+
+# Architecture
+
+<img width="578" alt="pfm-server" src="https://user-images.githubusercontent.com/98637739/222732950-1d356ea8-82ed-42ef-805a-7e7721c80fe1.png">
+
+Git Action을 이용해 CI/CD 파이프라인을 구축하였습니다.
+
+Docker를 이용해 Server와 DB를 컨테이너화 하여 EBS 서비스에 업로드 했습니다.
+
+RDS를 이용해 Server의 예상치 못한 종료에 대비해 DB 클라우드화를 했습니다.
+
+Winston과 Daily Logger를 이용해 Log 파일을 관리하도록 했습니다.
+
+Grafana와 CloudWatch를 이용해 인프라 모니터링 체계를 구축 했습니다 (비용문제로 현재는 삭제)
+
+---
+
+# 서비스 소개
+
+취업을 준비하면서 자신의 이력서를 객관적으로 판단하기 힘들다는 생각을 많이 했습니다.
+
+포트폴리오를 직접 만들고 게시판을 통해 자신의 포트폴리오를 전문가들에게 평가받을 수 있는 서비스가 있다면 
+
+많은 도움이 될 것이라 생각해서 해당 프로젝트를 만들었습니다.
+
+---
+
+# Demo Image  
 
 Front Page
 
@@ -33,16 +82,6 @@ Board Page 1
 Board Page 2
 
 <img width="946" alt="image" src="https://user-images.githubusercontent.com/98637739/222263086-f1cd740a-075b-4b32-b951-9be3280ffc38.png">
-
----
-
-# 서비스 소개
-
-취업을 준비하면서 자신의 이력서를 객관적으로 판단하기 힘들다는 생각을 많이 했습니다.
-
-포트폴리오를 직접 만들고 게시판을 통해 자신의 포트폴리오를 전문가들에게 평가받을 수 있는 서비스가 있다면 
-
-많은 도움이 될 것이라 생각해서 해당 프로젝트를 만들었습니다.
 
 ---
 
@@ -98,22 +137,6 @@ Git Flow 전략을 적극적으로 활용하여 효율적으로 협업하였습�
 
 </div>
 </details>
-
----
-
-# Architecture
-
-<img width="578" alt="pfm-server" src="https://user-images.githubusercontent.com/98637739/222732950-1d356ea8-82ed-42ef-805a-7e7721c80fe1.png">
-
-Git Action을 이용해 CI/CD 파이프라인을 구축하였습니다.
-
-Docker를 이용해 Server와 DB를 컨테이너화 하여 EBS 서비스에 업로드 했습니다.
-
-RDS를 이용해 Server의 예상치 못한 종료에 대비해 DB 클라우드화를 했습니다.
-
-Winston과 Daily Logger를 이용해 Log 파일을 관리하도록 했습니다.
-
-Grafana와 CloudWatch를 이용해 인프라 모니터링 체계를 구축 했습니다 (비용문제로 현재는 삭제)
 
 ---
 
